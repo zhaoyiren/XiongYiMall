@@ -23,10 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.xiongyi.util.Const;
 
 
-
 /**
  * @author GUXIONG
- * @description µÇÂ¼ÑéÖ¤Âë
+ * @description ç™»å½•éªŒè¯ç 
  */
 @Controller
 @RequestMapping("/code")

@@ -204,7 +204,7 @@
 				<version>2.2</version>
 				<configuration>
 					<url>http://localhost</url>
-					<port>80</port>
+					<port>8080</port>
 					<path>/</path>
 					<uriEncoding>utf-8</uriEncoding>
 				</configuration>

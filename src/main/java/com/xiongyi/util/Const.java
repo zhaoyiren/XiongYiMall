@@ -4,47 +4,47 @@ import org.springframework.context.ApplicationContext;
 
 /**
  * @author GUXIONG
- * ÏîÄ¿Ïà¹Ø³£Á¿
+ * é¡¹ç›®ç›¸å…³å¸¸é‡
  */
 public class Const {
-	public static final String SESSION_SECURITY_CODE = "sessionSecCode";//ÑéÖ¤Âë
-	public static final String SESSION_USER = "sessionUser";			//sessionÓÃµÄÓÃ»§
+	public static final String SESSION_SECURITY_CODE = "sessionSecCode";//éªŒè¯ç 
+	public static final String SESSION_USER = "sessionUser";			//sessionç”¨çš„ç”¨æˆ·
 	public static final String SESSION_ROLE_RIGHTS = "sessionRoleRights";
 	public static final String sSESSION_ROLE_RIGHTS = "sessionRoleRights";
-	public static final String SESSION_menuList = "menuList";			//µ±Ç°²Ëµ¥
-	public static final String SESSION_allmenuList = "allmenuList";		//È«²¿²Ëµ¥
+	public static final String SESSION_menuList = "menuList";			//å½“å‰èœå•
+	public static final String SESSION_allmenuList = "allmenuList";		//å…¨éƒ¨èœå•
 	public static final String SESSION_QX = "QX";
 	public static final String SESSION_userpds = "userpds";			
-	public static final String SESSION_USERROL = "USERROL";				//ÓÃ»§¶ÔÏó
-	public static final String SESSION_USERNAME = "USERNAME";			//ÓÃ»§Ãû
+	public static final String SESSION_USERROL = "USERROL";				//ç”¨æˆ·å¯¹è±¡
+	public static final String SESSION_USERNAME = "USERNAME";			//ç”¨æˆ·å
 	public static final String TRUE = "T";
 	public static final String FALSE = "F";
-	public static final String LOGIN = "/login_toLogin.do";				//µÇÂ¼µØÖ·
-	public static final String SYSNAME = "admin/config/SYSNAME.txt";	//ÏµÍ³Ãû³ÆÂ·¾¶
-	public static final String PAGE	= "admin/config/PAGE.txt";			//·ÖÒ³ÌõÊıÅäÖÃÂ·¾¶
-	public static final String EMAIL = "admin/config/EMAIL.txt";		//ÓÊÏä·şÎñÆ÷ÅäÖÃÂ·¾¶
-	public static final String SMS1 = "admin/config/SMS1.txt";			//¶ÌĞÅÕË»§ÅäÖÃÂ·¾¶1
-	public static final String SMS2 = "admin/config/SMS2.txt";			//¶ÌĞÅÕË»§ÅäÖÃÂ·¾¶2
-	public static final String FWATERM = "admin/config/FWATERM.txt";	//ÎÄ×ÖË®Ó¡ÅäÖÃÂ·¾¶
-	public static final String IWATERM = "admin/config/IWATERM.txt";	//Í¼Æ¬Ë®Ó¡ÅäÖÃÂ·¾¶
-	public static final String WEIXIN	= "admin/config/WEIXIN.txt";	//Î¢ĞÅÅäÖÃÂ·¾¶
-	public static final String WEBSOCKET = "admin/config/WEBSOCKET.txt";//WEBSOCKETÅäÖÃÂ·¾¶
-	public static final String FILEPATHIMG = "uploadFiles/uploadImgs/";	//Í¼Æ¬ÉÏ´«Â·¾¶
-	public static final String FILEPATHFILE = "uploadFiles/file/";		//ÎÄ¼şÉÏ´«Â·¾¶
-	public static final String FILEPATHTWODIMENSIONCODE = "uploadFiles/twoDimensionCode/"; //¶şÎ¬Âë´æ·ÅÂ·¾¶
-	public static final String NO_INTERCEPTOR_PATH = ".*/((login)|(logout)|(code)|(app)|(weixin)|(static)|(main)|(websocket)).*";	//²»¶ÔÆ¥Åä¸ÃÖµµÄ·ÃÎÊÂ·¾¶À¹½Ø£¨ÕıÔò£©
-	public static ApplicationContext WEB_APP_CONTEXT = null; //¸ÃÖµ»áÔÚwebÈİÆ÷Æô¶¯Ê±ÓÉWebAppContextListener³õÊ¼»¯
+	public static final String LOGIN = "/login_toLogin.do";				//ç™»å½•åœ°å€
+	public static final String SYSNAME = "admin/config/SYSNAME.txt";	//ç³»ç»Ÿåç§°è·¯å¾„
+	public static final String PAGE	= "admin/config/PAGE.txt";			//åˆ†é¡µæ¡æ•°é…ç½®è·¯å¾„
+	public static final String EMAIL = "admin/config/EMAIL.txt";		//é‚®ç®±æœåŠ¡å™¨é…ç½®è·¯å¾„
+	public static final String SMS1 = "admin/config/SMS1.txt";			//çŸ­ä¿¡è´¦æˆ·é…ç½®è·¯å¾„1
+	public static final String SMS2 = "admin/config/SMS2.txt";			//çŸ­ä¿¡è´¦æˆ·é…ç½®è·¯å¾„2
+	public static final String FWATERM = "admin/config/FWATERM.txt";	//æ–‡å­—æ°´å°é…ç½®è·¯å¾„
+	public static final String IWATERM = "admin/config/IWATERM.txt";	//å›¾ç‰‡æ°´å°é…ç½®è·¯å¾„
+	public static final String WEIXIN	= "admin/config/WEIXIN.txt";	//å¾®ä¿¡é…ç½®è·¯å¾„
+	public static final String WEBSOCKET = "admin/config/WEBSOCKET.txt";//WEBSOCKETé…ç½®è·¯å¾„
+	public static final String FILEPATHIMG = "uploadFiles/uploadImgs/";	//å›¾ç‰‡ä¸Šä¼ è·¯å¾„
+	public static final String FILEPATHFILE = "uploadFiles/file/";		//æ–‡ä»¶ä¸Šä¼ è·¯å¾„
+	public static final String FILEPATHTWODIMENSIONCODE = "uploadFiles/twoDimensionCode/"; //äºŒç»´ç å­˜æ”¾è·¯å¾„
+	public static final String NO_INTERCEPTOR_PATH = ".*/((login)|(logout)|(code)|(app)|(weixin)|(static)|(main)|(websocket)|(goodinfo)).*";	//ä¸å¯¹åŒ¹é…è¯¥å€¼çš„è®¿é—®è·¯å¾„æ‹¦æˆªï¼ˆæ­£åˆ™ï¼‰
+	public static ApplicationContext WEB_APP_CONTEXT = null; //è¯¥å€¼ä¼šåœ¨webå®¹å™¨å¯åŠ¨æ—¶ç”±WebAppContextListeneråˆå§‹åŒ–
 	
 	/**
 	 * APP Constants
 	 */
-	//app×¢²á½Ó¿Ú_ÇëÇóĞ­Òé²ÎÊı)
+	//appæ³¨å†Œæ¥å£_è¯·æ±‚åè®®å‚æ•°)
 	public static final String[] APP_REGISTERED_PARAM_ARRAY = new String[]{"countries","uname","passwd","title","full_name","company_name","countries_code","area_code","telephone","mobile"};
-	public static final String[] APP_REGISTERED_VALUE_ARRAY = new String[]{"¹ú¼®","ÓÊÏäÕÊºÅ","ÃÜÂë","³ÆÎ½","Ãû³Æ","¹«Ë¾Ãû³Æ","¹ú¼Ò±àºÅ","ÇøºÅ","µç»°","ÊÖ»úºÅ"};
+	public static final String[] APP_REGISTERED_VALUE_ARRAY = new String[]{"å›½ç±","é‚®ç®±å¸å·","å¯†ç ","ç§°è°“","åç§°","å…¬å¸åç§°","å›½å®¶ç¼–å·","åŒºå·","ç”µè¯","æ‰‹æœºå·"};
 	
-	//app¸ù¾İÓÃ»§Ãû»ñÈ¡»áÔ±ĞÅÏ¢½Ó¿Ú_ÇëÇóĞ­ÒéÖĞµÄ²ÎÊı
+	//appæ ¹æ®ç”¨æˆ·åè·å–ä¼šå‘˜ä¿¡æ¯æ¥å£_è¯·æ±‚åè®®ä¸­çš„å‚æ•°
 	public static final String[] APP_GETAPPUSER_PARAM_ARRAY = new String[]{"USERNAME"};
-	public static final String[] APP_GETAPPUSER_VALUE_ARRAY = new String[]{"ÓÃ»§Ãû"};
+	public static final String[] APP_GETAPPUSER_VALUE_ARRAY = new String[]{"ç”¨æˆ·å"};
 	
 	
 }

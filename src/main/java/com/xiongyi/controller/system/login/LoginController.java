@@ -39,11 +39,9 @@ import com.xiongyi.util.RightsHelper;
 import com.xiongyi.util.Tools;
 
 
-
-
 /**
  * @author GUXIONG
- * @description ×ÜÈë¿Ú
+ * @description æ€»å…¥å£
  */
 @Controller
 public class LoginController extends BaseController {
@@ -61,7 +59,7 @@ public class LoginController extends BaseController {
 	@Resource(name="appuserService")
 	private AppuserManager appuserService;
 	
-	/**·ÃÎÊµÇÂ¼Ò³
+	/**è®¿é—®ç™»å½•é¡µ
 	 * @return
 	 * @throws Exception
 	 */
@@ -70,13 +68,13 @@ public class LoginController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		pd.put("SYSNAME", Tools.readTxtFile(Const.SYSNAME)); //¶ÁÈ¡ÏµÍ³Ãû³Æ
+		pd.put("SYSNAME", Tools.readTxtFile(Const.SYSNAME)); //è¯»å–ç³»ç»Ÿåç§°
 		mv.setViewName("system/index/login");
 		mv.addObject("pd",pd);
 		return mv;
 	}
 	
-	/**ÇëÇóµÇÂ¼£¬ÑéÖ¤ÓÃ»§
+	/**è¯·æ±‚ç™»å½•ï¼ŒéªŒè¯ç”¨æˆ·
 	 * @return
 	 * @throws Exception
 	 */
@@ -90,18 +88,18 @@ public class LoginController extends BaseController {
 		String KEYDATA[] = pd.getString("KEYDATA").split(",xy,");
 		if(null != KEYDATA && KEYDATA.length == 3){
 			Session session = Jurisdiction.getSession();
-			String sessionCode = (String)session.getAttribute(Const.SESSION_SECURITY_CODE);		//»ñÈ¡sessionÖĞµÄÑéÖ¤Âë
+			String sessionCode = (String)session.getAttribute(Const.SESSION_SECURITY_CODE);		//è·å–sessionä¸­çš„éªŒè¯ç 
 			String code = KEYDATA[2];
-			if(null == code || "".equals(code)){//ÅĞ¶ÏĞ§ÑéÂë
-				errInfo = "nullcode"; 			//Ğ§ÑéÂëÎª¿Õ
+			if(null == code || "".equals(code)){//åˆ¤æ–­æ•ˆéªŒç 
+				errInfo = "nullcode"; 			//æ•ˆéªŒç ä¸ºç©º
 			}else{
-				String USERNAME = KEYDATA[0];	//µÇÂ¼¹ıÀ´µÄÓÃ»§Ãû
-				String PASSWORD  = KEYDATA[1];	//µÇÂ¼¹ıÀ´µÄÃÜÂë
+				String USERNAME = KEYDATA[0];	//ç™»å½•è¿‡æ¥çš„ç”¨æˆ·å
+				String PASSWORD  = KEYDATA[1];	//ç™»å½•è¿‡æ¥çš„å¯†ç 
 				pd.put("USERNAME", USERNAME);
-				if(Tools.notEmpty(sessionCode) && sessionCode.equalsIgnoreCase(code)){		//ÅĞ¶ÏµÇÂ¼ÑéÖ¤Âë
-					String passwd = new SimpleHash("SHA-1", USERNAME, PASSWORD).toString();	//ÃÜÂë¼ÓÃÜ
+				if(Tools.notEmpty(sessionCode) && sessionCode.equalsIgnoreCase(code)){		//åˆ¤æ–­ç™»å½•éªŒè¯ç 
+					String passwd = new SimpleHash("SHA-1", USERNAME, PASSWORD).toString();	//å¯†ç åŠ å¯†
 					pd.put("PASSWORD", passwd);
-					pd = userService.getUserByNameAndPwd(pd);	//¸ù¾İÓÃ»§ÃûºÍÃÜÂëÈ¥¶ÁÈ¡ÓÃ»§ĞÅÏ¢
+					pd = userService.getUserByNameAndPwd(pd);	//æ ¹æ®ç”¨æˆ·åå’Œå¯†ç å»è¯»å–ç”¨æˆ·ä¿¡æ¯
 					if(pd != null){
 						pd.put("LAST_LOGIN",DateUtil.getTime().toString());
 						userService.updateLastLogin(pd);
@@ -115,37 +113,37 @@ public class LoginController extends BaseController {
 						user.setLAST_LOGIN(pd.getString("LAST_LOGIN"));
 						user.setIP(pd.getString("IP"));
 						user.setSTATUS(pd.getString("STATUS"));
-						session.setAttribute(Const.SESSION_USER, user);			//°ÑÓÃ»§ĞÅÏ¢·ÅsessionÖĞ
-						session.removeAttribute(Const.SESSION_SECURITY_CODE);	//Çå³ıµÇÂ¼ÑéÖ¤ÂëµÄsession
-						//shiro¼ÓÈëÉí·İÑéÖ¤
+						session.setAttribute(Const.SESSION_USER, user);			//æŠŠç”¨æˆ·ä¿¡æ¯æ”¾sessionä¸­
+						session.removeAttribute(Const.SESSION_SECURITY_CODE);	//æ¸…é™¤ç™»å½•éªŒè¯ç çš„session
+						//shiroåŠ å…¥èº«ä»½éªŒè¯
 						Subject subject = SecurityUtils.getSubject(); 
 					    UsernamePasswordToken token = new UsernamePasswordToken(USERNAME, PASSWORD); 
 					    try { 
 					        subject.login(token); 
 					    } catch (AuthenticationException e) { 
-					    	errInfo = "Éí·İÑéÖ¤Ê§°Ü£¡";
+					    	errInfo = "èº«ä»½éªŒè¯å¤±è´¥ï¼";
 					    }
 					}else{
-						errInfo = "usererror"; 				//ÓÃ»§Ãû»òÃÜÂëÓĞÎó
-						logBefore(logger, USERNAME+"µÇÂ¼ÏµÍ³ÃÜÂë»òÓÃ»§Ãû´íÎó");
+						errInfo = "usererror"; 				//ç”¨æˆ·åæˆ–å¯†ç æœ‰è¯¯
+						logBefore(logger, USERNAME+"ç™»å½•ç³»ç»Ÿå¯†ç æˆ–ç”¨æˆ·åé”™è¯¯");
 					}
 				}else{
-					errInfo = "codeerror";				 	//ÑéÖ¤ÂëÊäÈëÓĞÎó
+					errInfo = "codeerror";				 	//éªŒè¯ç è¾“å…¥æœ‰è¯¯
 				}
 				if(Tools.isEmpty(errInfo)){
-					errInfo = "success";					//ÑéÖ¤³É¹¦
-					logBefore(logger, USERNAME+"µÇÂ¼ÏµÍ³");
+					errInfo = "success";					//éªŒè¯æˆåŠŸ
+					logBefore(logger, USERNAME+"ç™»å½•ç³»ç»Ÿ");
 				}
 			}
 		}else{
-			errInfo = "error";	//È±ÉÙ²ÎÊı
+			errInfo = "error";	//ç¼ºå°‘å‚æ•°
 		}
 		map.put("result", errInfo);
 		return AppUtil.returnObject(new PageData(), map);
 	}
 	
-	/**·ÃÎÊÏµÍ³Ê×Ò³
-	 * @param changeMenu£ºÇĞ»»²Ëµ¥²ÎÊı
+	/**è®¿é—®ç³»ç»Ÿé¦–é¡µ
+	 * @param changeMenuï¼šåˆ‡æ¢èœå•å‚æ•°
 	 * @return
 	 */
 	@RequestMapping(value="/main/{changeMenu}")
@@ -156,36 +154,36 @@ public class LoginController extends BaseController {
 		pd = this.getPageData();
 		try{
 			Session session = Jurisdiction.getSession();
-			User user = (User)session.getAttribute(Const.SESSION_USER);				//¶ÁÈ¡sessionÖĞµÄÓÃ»§ĞÅÏ¢(µ¥¶ÀÓÃ»§ĞÅÏ¢)
+			User user = (User)session.getAttribute(Const.SESSION_USER);				//è¯»å–sessionä¸­çš„ç”¨æˆ·ä¿¡æ¯(å•ç‹¬ç”¨æˆ·ä¿¡æ¯)
 			if (user != null) {
-				User userr = (User)session.getAttribute(Const.SESSION_USERROL);		//¶ÁÈ¡sessionÖĞµÄÓÃ»§ĞÅÏ¢(º¬½ÇÉ«ĞÅÏ¢)
+				User userr = (User)session.getAttribute(Const.SESSION_USERROL);		//è¯»å–sessionä¸­çš„ç”¨æˆ·ä¿¡æ¯(å«è§’è‰²ä¿¡æ¯)
 				if(null == userr){
-					user = userService.getUserAndRoleById(user.getUSER_ID());		//Í¨¹ıÓÃ»§ID¶ÁÈ¡ÓÃ»§ĞÅÏ¢ºÍ½ÇÉ«ĞÅÏ¢
-					session.setAttribute(Const.SESSION_USERROL, user);				//´æÈësession	
+					user = userService.getUserAndRoleById(user.getUSER_ID());		//é€šè¿‡ç”¨æˆ·IDè¯»å–ç”¨æˆ·ä¿¡æ¯å’Œè§’è‰²ä¿¡æ¯
+					session.setAttribute(Const.SESSION_USERROL, user);				//å­˜å…¥session	
 				}else{
 					user = userr;
 				}
 				String USERNAME = user.getUSERNAME();
-				Role role = user.getRole();											//»ñÈ¡ÓÃ»§½ÇÉ«
-				String roleRights = role!=null ? role.getRIGHTS() : "";				//½ÇÉ«È¨ÏŞ(²Ëµ¥È¨ÏŞ)
-				session.setAttribute(USERNAME + Const.SESSION_ROLE_RIGHTS, roleRights); //½«½ÇÉ«È¨ÏŞ´æÈësession
-				session.setAttribute(Const.SESSION_USERNAME, USERNAME);				//·ÅÈëÓÃ»§Ãûµ½session
+				Role role = user.getRole();											//è·å–ç”¨æˆ·è§’è‰²
+				String roleRights = role!=null ? role.getRIGHTS() : "";				//è§’è‰²æƒé™(èœå•æƒé™)
+				session.setAttribute(USERNAME + Const.SESSION_ROLE_RIGHTS, roleRights); //å°†è§’è‰²æƒé™å­˜å…¥session
+				session.setAttribute(Const.SESSION_USERNAME, USERNAME);				//æ”¾å…¥ç”¨æˆ·ååˆ°session
 				List<Menu> allmenuList = new ArrayList<Menu>();
 				if(null == session.getAttribute(USERNAME + Const.SESSION_allmenuList)){	
-					allmenuList = menuService.listAllMenuQx("0");					//»ñÈ¡ËùÓĞ²Ëµ¥
+					allmenuList = menuService.listAllMenuQx("0");					//è·å–æ‰€æœ‰èœå•
 					if(Tools.notEmpty(roleRights)){
-						allmenuList = this.readMenu(allmenuList, roleRights);		//¸ù¾İ½ÇÉ«È¨ÏŞ»ñÈ¡±¾È¨ÏŞµÄ²Ëµ¥ÁĞ±í
+						allmenuList = this.readMenu(allmenuList, roleRights);		//æ ¹æ®è§’è‰²æƒé™è·å–æœ¬æƒé™çš„èœå•åˆ—è¡¨
 					}
-					session.setAttribute(USERNAME + Const.SESSION_allmenuList, allmenuList);//²Ëµ¥È¨ÏŞ·ÅÈësessionÖĞ
+					session.setAttribute(USERNAME + Const.SESSION_allmenuList, allmenuList);//èœå•æƒé™æ”¾å…¥sessionä¸­
 				}else{
 					allmenuList = (List<Menu>)session.getAttribute(USERNAME + Const.SESSION_allmenuList);
 				}
-				//ÇĞ»»²Ëµ¥´¦Àí=====start
+				//åˆ‡æ¢èœå•å¤„ç†=====start
 				List<Menu> menuList = new ArrayList<Menu>();
 				if(null == session.getAttribute(USERNAME + Const.SESSION_menuList) || ("yes".equals(changeMenu))){
 					List<Menu> menuList1 = new ArrayList<Menu>();
 					List<Menu> menuList2 = new ArrayList<Menu>();
-					//²ğ·Ö²Ëµ¥
+					//æ‹†åˆ†èœå•
 					for(int i=0;i<allmenuList.size();i++){
 						Menu menu = allmenuList.get(i);
 						if("1".equals(menu.getMENU_TYPE())){
@@ -209,36 +207,36 @@ public class LoginController extends BaseController {
 				}else{
 					menuList = (List<Menu>)session.getAttribute(USERNAME + Const.SESSION_menuList);
 				}
-				//ÇĞ»»²Ëµ¥´¦Àí=====end
+				//åˆ‡æ¢èœå•å¤„ç†=====end
 				if(null == session.getAttribute(USERNAME + Const.SESSION_QX)){
-					session.setAttribute(USERNAME + Const.SESSION_QX, this.getUQX(USERNAME));	//°´Å¥È¨ÏŞ·Åµ½sessionÖĞ
+					session.setAttribute(USERNAME + Const.SESSION_QX, this.getUQX(USERNAME));	//æŒ‰é’®æƒé™æ”¾åˆ°sessionä¸­
 				}
-				this.getRemortIP(USERNAME);	//¸üĞÂµÇÂ¼IP
+				this.getRemortIP(USERNAME);	//æ›´æ–°ç™»å½•IP
 				mv.setViewName("system/index/main");
 				mv.addObject("user", user);
 				mv.addObject("menuList", menuList);
 			}else {
-				mv.setViewName("system/index/login");//sessionÊ§Ğ§ºóÌø×ªµÇÂ¼Ò³Ãæ
+				mv.setViewName("system/index/login");//sessionå¤±æ•ˆåè·³è½¬ç™»å½•é¡µé¢
 			}
 		} catch(Exception e){
 			mv.setViewName("system/index/login");
 			logger.error(e.getMessage(), e);
 		}
-		pd.put("SYSNAME", Tools.readTxtFile(Const.SYSNAME)); //¶ÁÈ¡ÏµÍ³Ãû³Æ
+		pd.put("SYSNAME", Tools.readTxtFile(Const.SYSNAME)); //è¯»å–ç³»ç»Ÿåç§°
 		mv.addObject("pd",pd);
 		return mv;
 	}
 	
-	/**¸ù¾İ½ÇÉ«È¨ÏŞ»ñÈ¡±¾È¨ÏŞµÄ²Ëµ¥ÁĞ±í(µİ¹é´¦Àí)
-	 * @param menuList£º´«ÈëµÄ×Ü²Ëµ¥
-	 * @param roleRights£º¼ÓÃÜµÄÈ¨ÏŞ×Ö·û´®
+	/**æ ¹æ®è§’è‰²æƒé™è·å–æœ¬æƒé™çš„èœå•åˆ—è¡¨(é€’å½’å¤„ç†)
+	 * @param menuListï¼šä¼ å…¥çš„æ€»èœå•
+	 * @param roleRightsï¼šåŠ å¯†çš„æƒé™å­—ç¬¦ä¸²
 	 * @return
 	 */
 	public List<Menu> readMenu(List<Menu> menuList,String roleRights){
 		for(int i=0;i<menuList.size();i++){
 			menuList.get(i).setHasMenu(RightsHelper.testRights(roleRights, menuList.get(i).getMENU_ID()));
-			if(menuList.get(i).isHasMenu()){		//ÅĞ¶ÏÊÇ·ñÓĞ´Ë²Ëµ¥È¨ÏŞ
-				this.readMenu(menuList.get(i).getSubMenu(), roleRights);//ÊÇ£º¼ÌĞøÅÅ²éÆä×Ó²Ëµ¥
+			if(menuList.get(i).isHasMenu()){		//åˆ¤æ–­æ˜¯å¦æœ‰æ­¤èœå•æƒé™
+				this.readMenu(menuList.get(i).getSubMenu(), roleRights);//æ˜¯ï¼šç»§ç»­æ’æŸ¥å…¶å­èœå•
 			}else{
 				menuList.remove(i);
 				i--;
@@ -248,7 +246,7 @@ public class LoginController extends BaseController {
 	}
 	
 	/**
-	 * ½øÈëtab±êÇ©
+	 * è¿›å…¥tabæ ‡ç­¾
 	 * @return
 	 */
 	@RequestMapping(value="/tab")
@@ -257,7 +255,7 @@ public class LoginController extends BaseController {
 	}
 	
 	/**
-	 * ½øÈëÊ×Ò³ºóµÄÄ¬ÈÏÒ³Ãæ
+	 * è¿›å…¥é¦–é¡µåçš„é»˜è®¤é¡µé¢
 	 * @return
 	 * @throws Exception 
 	 */
@@ -265,25 +263,25 @@ public class LoginController extends BaseController {
 	public ModelAndView defaultPage() throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
-		pd.put("userCount", Integer.parseInt(userService.getUserCount("").get("userCount").toString())-1);				//ÏµÍ³ÓÃ»§Êı
-		pd.put("appUserCount", Integer.parseInt(appuserService.getAppUserCount("").get("appUserCount").toString()));	//»áÔ±Êı
+		pd.put("userCount", Integer.parseInt(userService.getUserCount("").get("userCount").toString())-1);				//ç³»ç»Ÿç”¨æˆ·æ•°
+		pd.put("appUserCount", Integer.parseInt(appuserService.getAppUserCount("").get("appUserCount").toString()));	//ä¼šå‘˜æ•°
 		mv.addObject("pd",pd);
 		mv.setViewName("system/index/default");
 		return mv;
 	}
 	
 	/**
-	 * ÓÃ»§×¢Ïú
+	 * ç”¨æˆ·æ³¨é”€
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping(value="/logout")
 	public ModelAndView logout(){
-		String USERNAME = Jurisdiction.getUsername();	//µ±Ç°µÇÂ¼µÄÓÃ»§Ãû
-		logBefore(logger, USERNAME+"ÍË³öÏµÍ³");
+		String USERNAME = Jurisdiction.getUsername();	//å½“å‰ç™»å½•çš„ç”¨æˆ·å
+		logBefore(logger, USERNAME+"é€€å‡ºç³»ç»Ÿ");
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
-		Session session = Jurisdiction.getSession();	//ÒÔÏÂÇå³ısession»º´æ
+		Session session = Jurisdiction.getSession();	//ä»¥ä¸‹æ¸…é™¤sessionç¼“å­˜
 		session.removeAttribute(Const.SESSION_USER);
 		session.removeAttribute(USERNAME + Const.SESSION_ROLE_RIGHTS);
 		session.removeAttribute(USERNAME + Const.SESSION_allmenuList);
@@ -293,18 +291,18 @@ public class LoginController extends BaseController {
 		session.removeAttribute(Const.SESSION_USERNAME);
 		session.removeAttribute(Const.SESSION_USERROL);
 		session.removeAttribute("changeMenu");
-		//shiroÏú»ÙµÇÂ¼
+		//shiroé”€æ¯ç™»å½•
 		Subject subject = SecurityUtils.getSubject(); 
 		subject.logout();
 		pd = this.getPageData();
 		pd.put("msg", pd.getString("msg"));
-		pd.put("SYSNAME", Tools.readTxtFile(Const.SYSNAME)); //¶ÁÈ¡ÏµÍ³Ãû³Æ
+		pd.put("SYSNAME", Tools.readTxtFile(Const.SYSNAME)); //è¯»å–ç³»ç»Ÿåç§°
 		mv.setViewName("system/index/login");
 		mv.addObject("pd",pd);
 		return mv;
 	}
 	
-	/**»ñÈ¡ÓÃ»§È¨ÏŞ
+	/**è·å–ç”¨æˆ·æƒé™
 	 * @param session
 	 * @return
 	 */
@@ -313,20 +311,20 @@ public class LoginController extends BaseController {
 		Map<String, String> map = new HashMap<String, String>();
 		try {
 			pd.put(Const.SESSION_USERNAME, USERNAME);
-			pd.put("ROLE_ID", userService.findByUsername(pd).get("ROLE_ID").toString());//»ñÈ¡½ÇÉ«ID
-			pd = roleService.findObjectById(pd);										//»ñÈ¡½ÇÉ«ĞÅÏ¢														
-			map.put("adds", pd.getString("ADD_QX"));	//Ôö
-			map.put("dels", pd.getString("DEL_QX"));	//É¾
-			map.put("edits", pd.getString("EDIT_QX"));	//¸Ä
-			map.put("chas", pd.getString("CHA_QX"));	//²é
+			pd.put("ROLE_ID", userService.findByUsername(pd).get("ROLE_ID").toString());//è·å–è§’è‰²ID
+			pd = roleService.findObjectById(pd);										//è·å–è§’è‰²ä¿¡æ¯														
+			map.put("adds", pd.getString("ADD_QX"));	//å¢
+			map.put("dels", pd.getString("DEL_QX"));	//åˆ 
+			map.put("edits", pd.getString("EDIT_QX"));	//æ”¹
+			map.put("chas", pd.getString("CHA_QX"));	//æŸ¥
 			List<PageData> buttonQXnamelist = new ArrayList<PageData>();
 			if("admin".equals(USERNAME)){
-				buttonQXnamelist = xybuttonService.listAll(pd);					//adminÓÃ»§ÓµÓĞËùÓĞ°´Å¥È¨ÏŞ
+				buttonQXnamelist = xybuttonService.listAll(pd);					//adminç”¨æˆ·æ‹¥æœ‰æ‰€æœ‰æŒ‰é’®æƒé™
 			}else{
-				buttonQXnamelist = buttonrightsService.listAllBrAndQxname(pd);	//´Ë½ÇÉ«ÓµÓĞµÄ°´Å¥È¨ÏŞ±êÊ¶ÁĞ±í
+				buttonQXnamelist = buttonrightsService.listAllBrAndQxname(pd);	//æ­¤è§’è‰²æ‹¥æœ‰çš„æŒ‰é’®æƒé™æ ‡è¯†åˆ—è¡¨
 			}
 			for(int i=0;i<buttonQXnamelist.size();i++){
-				map.put(buttonQXnamelist.get(i).getString("QX_NAME"),"1");		//°´Å¥È¨ÏŞ
+				map.put(buttonQXnamelist.get(i).getString("QX_NAME"),"1");		//æŒ‰é’®æƒé™
 			}
 		} catch (Exception e) {
 			logger.error(e.toString(), e);
@@ -334,7 +332,7 @@ public class LoginController extends BaseController {
 		return map;
 	}
 	
-	/** ¸üĞÂµÇÂ¼ÓÃ»§µÄIP
+	/** æ›´æ–°ç™»å½•ç”¨æˆ·çš„IP
 	 * @param USERNAME
 	 * @throws Exception
 	 */

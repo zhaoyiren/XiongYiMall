@@ -14,6 +14,13 @@
 		<typeAlias type="com.xiongyi.entity.Role" alias="Role"/>
 		<typeAlias type="com.xiongyi.entity.Menu" alias="Menu"/>
 		<typeAlias type="com.xiongyi.util.PageData" alias="pd"/>
+		<typeAlias type="com.xiongyi.entity.business.goodinfo.GoodInfo" alias="GoodInfo"/>
+		<typeAlias type="com.xiongyi.entity.business.goods.Goods" alias="Goods"/>
+		<typeAlias type="com.xiongyi.entity.business.goodsdiscuss.GoodsDiscuss" alias="GoodsDiscuss"/>
+		<typeAlias type="com.xiongyi.entity.business.order.Order" alias="Order"/>
+		<typeAlias type="com.xiongyi.entity.business.shopcar.ShopCar" alias="ShopCar"/>
+		<typeAlias type="com.xiongyi.entity.business.stock.Stock" alias="Stock"/>
+		<typeAlias type="com.xiongyi.entity.business.stockrecord.StockRecord" alias="StockRecord"/>
 		<!-- 分页 -->
 		<typeAlias type="com.xiongyi.entity.Page" alias="Page"/>
 	</typeAliases>

@@ -85,7 +85,7 @@
 	
 	<!-- 事物处理 -->
 	<aop:config>
-		<aop:pointcut id="pc" expression="execution(* com.xiongyi.cg.service..*(..))" />
+		<aop:pointcut id="pc" expression="execution(* com.xiongyi.service..*(..))" />
 		<aop:advisor pointcut-ref="pc" advice-ref="txAdvice" />
 	</aop:config>
 	
@@ -127,9 +127,13 @@
 				/uploadFiles/uploadImgs/** 	= anon
 	           	/code.do 					= anon
 	           	/login_login	 			= anon
+	           	/portal/*= anon
 	           	/app**/** 					= anon
 	           	/weixin/** 					= anon
-	           	/**							= authc
+	           	/js/**						= anon
+	           	/images/**					= anon
+	           	/css/**						= anon
+	           	/**							= anon
 				</value>
 			</property>
 		</bean>
